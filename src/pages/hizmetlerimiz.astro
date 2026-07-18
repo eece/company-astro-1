@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 
 // Fetch all services from Content Collection
 const services = await getCollection('hizmetler');
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Hizmetlerimiz & Dijital Çözümler">
@@ -67,7 +68,7 @@ const services = await getCollection('hizmetler');
             <!-- Dynamic CTA Link -->
             <div class="mt-auto pt-6 border-t border-neutral-100 flex items-center">
               <a 
-                href={new URL(`/hizmetlerimiz/${service.id}`, Astro.url).pathname} 
+                href={`${base}hizmetlerimiz/${service.id}`} 
                 class="text-sm font-semibold text-neutral-900 hover:text-emerald-600 inline-flex items-center gap-1.5 transition-colors group/link cursor-pointer"
               >
                 Hizmet Detayını İnceleyin

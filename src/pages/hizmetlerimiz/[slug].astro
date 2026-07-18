@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 
 const { entry, allEntries } = Astro.props;
 const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title={entry.data.title} description={entry.data.shortDescription}>
@@ -21,7 +22,7 @@ const { Content } = await render(entry);
   <section class="py-16 bg-neutral-900 text-white relative overflow-hidden" id="service-detail-header">
     <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/20 to-neutral-950/40"></div>
     <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-start gap-4">
-      <a href={new URL('/hizmetlerimiz', Astro.url).pathname} class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer">
+      <a href={`${base}hizmetlerimiz`} class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer">
         <Icon name="ChevronLeft" size={16} />
         Tüm Çözümlere Geri Dön
       </a>
@@ -47,7 +48,7 @@ const { Content } = await render(entry);
             <nav class="flex flex-col gap-2">
               {allEntries.map((navItem) => (
                 <a
-                  href={new URL(`/hizmetlerimiz/${navItem.id}`, Astro.url).pathname}
+                  href={`${base}hizmetlerimiz/${navItem.id}`}
                   class={`flex items-center justify-between p-3 rounded-xl text-sm font-medium transition-all ${
                     navItem.id === entry.id
                       ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/15 font-semibold'
@@ -119,7 +120,7 @@ const { Content } = await render(entry);
               </p>
             </div>
             <a
-              href={new URL('/iletisim', Astro.url).pathname}
+              href={`${base}iletisim`}
               class="flex items-center gap-2 bg-neutral-900 hover:bg-emerald-600 text-white font-sans text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-300 shadow-md cursor-pointer shrink-0"
             >
               Teklif Alın / Danışın

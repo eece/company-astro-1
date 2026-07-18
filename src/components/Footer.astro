@@ -3,16 +3,18 @@ import Icon from './Icon.astro';
 
 const currentYear = new Date().getFullYear();
 
-const homeUrl = new URL('/', Astro.url).pathname;
-const hakkimizdaUrl = new URL('/hakkimizda', Astro.url).pathname;
-const hizmetlerimizUrl = new URL('/hizmetlerimiz', Astro.url).pathname;
-const iletisimUrl = new URL('/iletisim', Astro.url).pathname;
+const base = import.meta.env.BASE_URL;
+
+const homeUrl = `${base}`;
+const hakkimizdaUrl = `${base}hakkimizda`;
+const hizmetlerimizUrl = `${base}hizmetlerimiz`;
+const iletisimUrl = `${base}iletisim`;
 
 const solutions = [
-  { title: "Web Geliştirme", path: new URL('/hizmetlerimiz/modern-web-gelistirme', Astro.url).pathname },
-  { title: "Yapay Zeka", path: new URL('/hizmetlerimiz/yapay-zeka-entegrasyonu', Astro.url).pathname },
-  { title: "UX/UI Tasarım", path: new URL('/hizmetlerimiz/dijital-marka-ve-ux-tasarim', Astro.url).pathname },
-  { title: "Mobil Uygulama", path: new URL('/hizmetlerimiz/mobil-uygulama-gelistirme', Astro.url).pathname }
+  { title: "Web Geliştirme", path: `${base}hizmetlerimiz/modern-web-gelistirme` },
+  { title: "Yapay Zeka", path: `${base}hizmetlerimiz/yapay-zeka-entegrasyonu` },
+  { title: "UX/UI Tasarım", path: `${base}hizmetlerimiz/dijital-marka-ve-ux-tasarim` },
+  { title: "Mobil Uygulama", path: `${base}hizmetlerimiz/mobil-uygulama-gelistirme` }
 ];
 ---
 

@@ -9,8 +9,9 @@ const allServices = await getCollection('hizmetler');
 // Take first 3 for featured display
 const featuredServices = allServices.slice(0, 3);
 
-const iletisimUrl = new URL('/iletisim', Astro.url).pathname;
-const hizmetlerimizUrl = new URL('/hizmetlerimiz', Astro.url).pathname;
+const base = import.meta.env.BASE_URL;
+const iletisimUrl = `${base}iletisim`;
+const hizmetlerimizUrl = `${base}hizmetlerimiz`;
 ---
 
 <Layout title="Yaratıcı Web & Dijital Mühendislik Ajansı">
@@ -187,7 +188,7 @@ const hizmetlerimizUrl = new URL('/hizmetlerimiz', Astro.url).pathname;
             </div>
 
             <div class="mt-auto pt-6 border-t border-neutral-50 flex items-center">
-              <a href={new URL(`/hizmetlerimiz/${service.id}`, Astro.url).pathname} class="text-sm font-semibold text-neutral-800 hover:text-emerald-600 inline-flex items-center gap-1.5 transition-colors group/link cursor-pointer">
+              <a href={`${base}hizmetlerimiz/${service.id}`} class="text-sm font-semibold text-neutral-800 hover:text-emerald-600 inline-flex items-center gap-1.5 transition-colors group/link cursor-pointer">
                 Detayları İncele
                 <Icon name="ArrowRight" size={16} class="group-hover/link:translate-x-1 transition-transform" />
               </a>
