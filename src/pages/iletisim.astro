@@ -1,0 +1,268 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+
+const contactInfo = [
+  {
+    icon: "Phone",
+    title: "Müşteri İlişkileri & Satış",
+    details: "+90 (212) 345 67 89",
+    subDetails: "Hafta içi: 09:00 - 18:00"
+  },
+  {
+    icon: "Mail",
+    title: "E-Posta Adreslerimiz",
+    details: "info@astradigital.com",
+    subDetails: "sales@astradigital.com"
+  },
+  {
+    icon: "MapPin",
+    title: "Merkez Ofis Adresi",
+    details: "Levent Loft Plaza, Blok B, No: 42",
+    subDetails: "Şişli / İstanbul, Türkiye"
+  },
+  {
+    icon: "Clock",
+    title: "Çalışma Saatlerimiz",
+    details: "Pazartesi - Cuma",
+    subDetails: "09:00 - 18:00 (Cumartesi-Pazar Kapalı)"
+  }
+];
+---
+
+<Layout title="İletişim & Teklif Alın">
+  <!-- Header Banner -->
+  <section class="py-20 bg-neutral-900 text-white relative overflow-hidden" id="contact-header">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/20 to-neutral-950/40"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-10"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center gap-6">
+      <span class="font-mono text-emerald-400 text-xs font-bold uppercase tracking-widest">İLETİŞİM</span>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+        Yeni Bir Başarı Hikayesi <br />Başlatmak İçin Hazırız
+      </h1>
+      <p class="text-neutral-400 text-lg sm:text-xl max-w-2xl leading-relaxed">
+        Projelerinizi hayata geçirmek, teknik destek almak veya sadece tanışmak için bizimle dilediğiniz zaman iletişime geçebilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-24 bg-white" id="contact-main">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <!-- Contact details left side -->
+        <div class="lg:col-span-5 flex flex-col gap-10" id="contact-details">
+          <div class="flex flex-col gap-4">
+            <span class="font-display text-xs font-semibold text-emerald-600 uppercase tracking-widest">BİZİMLE İLETİŞİME GEÇİN</span>
+            <h2 class="font-display text-3xl font-bold text-neutral-900 tracking-tight leading-snug">
+              Tüm Sorularınız İçin Yanınızdayız
+            </h2>
+            <p class="text-neutral-600 leading-relaxed">
+              Formu doldurarak projenizin ana hatlarını, bütçenizi ve zaman planınızı belirtebilirsiniz. Ekibimiz en geç 24 saat içerisinde teknik analiz ve ön teklifle geri dönüş yapacaktır.
+            </p>
+          </div>
+
+          <!-- Cards grid for details -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {contactInfo.map((info) => (
+              <div class="bg-neutral-50 rounded-2xl p-6 border border-neutral-100 flex flex-col gap-4 shadow-sm hover:border-emerald-200 transition-colors">
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <Icon name={info.icon} size={20} />
+                </div>
+                <div class="flex flex-col gap-1">
+                  <h4 class="font-display font-bold text-sm text-neutral-900 leading-snug">{info.title}</h4>
+                  <p class="text-xs text-neutral-600 leading-relaxed font-semibold">{info.details}</p>
+                  <p class="text-[11px] text-neutral-400 leading-relaxed font-mono">{info.subDetails}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Static compatible contact form right side -->
+        <div class="lg:col-span-7" id="contact-form-container">
+          <div class="bg-neutral-50 border border-neutral-100 rounded-3xl p-8 sm:p-10 shadow-sm relative">
+            <h3 class="font-display font-bold text-2xl text-neutral-900 mb-6">Detaylı Teklif Formu</h3>
+            
+            <!-- Dynamic submission banner -->
+            <div id="form-success-banner" class="hidden bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-6 mb-6 flex flex-col gap-2">
+              <span class="font-display font-bold text-base flex items-center gap-2">
+                <Icon name="ShieldCheck" size={20} class="text-emerald-600" />
+                Mesajınız Başarıyla Alındı!
+              </span>
+              <p class="text-xs text-emerald-700 leading-relaxed">
+                Astra Digital ekibine ulaştığınız için teşekkür ederiz. Uzmanlarımız form detaylarını inceleyerek 24 saat içinde e-posta adresiniz üzerinden sizinle iletişime geçecektir.
+              </p>
+            </div>
+
+            <!-- Pre-configured Formspree / Static Form -->
+            <form id="static-contact-form" class="flex flex-col gap-6" action="https://formspree.io/f/placeholder" method="POST">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Name Surname -->
+                <div class="flex flex-col gap-2">
+                  <label for="form-name" class="text-xs font-mono font-bold text-neutral-500 uppercase tracking-wider">Ad Soyad *</label>
+                  <input
+                    type="text"
+                    id="form-name"
+                    name="name"
+                    required
+                    placeholder="Örn: Ahmet Yılmaz"
+                    class="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-sans text-neutral-800"
+                  />
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col gap-2">
+                  <label for="form-email" class="text-xs font-mono font-bold text-neutral-500 uppercase tracking-wider">E-Posta *</label>
+                  <input
+                    type="email"
+                    id="form-email"
+                    name="email"
+                    required
+                    placeholder="Örn: name@company.com"
+                    class="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-sans text-neutral-800"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Phone -->
+                <div class="flex flex-col gap-2">
+                  <label for="form-phone" class="text-xs font-mono font-bold text-neutral-500 uppercase tracking-wider">Telefon Numarası</label>
+                  <input
+                    type="tel"
+                    id="form-phone"
+                    name="phone"
+                    placeholder="Örn: 0555 123 4567"
+                    class="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-sans text-neutral-800"
+                  />
+                </div>
+
+                <!-- Subject -->
+                <div class="flex flex-col gap-2">
+                  <label for="form-subject" class="text-xs font-mono font-bold text-neutral-500 uppercase tracking-wider">Hizmet Seçimi / Konu *</label>
+                  <select
+                    id="form-subject"
+                    name="subject"
+                    required
+                    class="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-sans text-neutral-800"
+                  >
+                    <option value="" disabled selected>Lütfen bir alan seçin</option>
+                    <option value="Web Geliştirme">Yüksek Performanslı Web Geliştirme</option>
+                    <option value="Yapay Zeka">Yapay Zeka & Otomasyon</option>
+                    <option value="UX/UI Tasarım">UX/UI Tasarım</option>
+                    <option value="Mobil Uygulama">Mobil Uygulama Geliştirme</option>
+                    <option value="DevOps & Bulut">Bulut & DevOps</option>
+                    <option value="SEO">SEO & Performans</option>
+                    <option value="Diğer">Diğer Konular</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="flex flex-col gap-2">
+                <label for="form-message" class="text-xs font-mono font-bold text-neutral-500 uppercase tracking-wider">Mesajınız / Proje Özeti *</label>
+                <textarea
+                  id="form-message"
+                  name="message"
+                  required
+                  rows="4"
+                  placeholder="Projenizi, hedeflerinizi ve varsa teknik detayları kısaca özetleyin..."
+                  class="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-sans text-neutral-800 resize-none"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="flex items-center justify-center gap-2 bg-neutral-900 hover:bg-emerald-600 text-white font-sans font-semibold text-sm px-8 py-4 rounded-xl transition-all duration-300 group cursor-pointer shadow-md active:scale-95 mt-2"
+              >
+                Formu Gönder
+                <Icon name="ArrowRight" size={16} class="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive / Performant Map Section -->
+  <section class="py-12 bg-neutral-50 border-t border-neutral-100" id="map-section">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="bg-white border border-neutral-200 rounded-3xl overflow-hidden p-4 shadow-sm">
+        <div id="interactive-map-wrapper" class="h-96 w-full rounded-2xl bg-neutral-100 flex flex-col items-center justify-center text-center p-6 relative group overflow-hidden">
+          
+          <!-- Static representation as default (Lighthouse score-friendly!) -->
+          <div id="static-map-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-cover bg-center transition-all duration-500" style="background-image: linear-gradient(rgba(24, 24, 27, 0.8), rgba(24, 24, 27, 0.8)), url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=1200&h=400');">
+            <div class="flex flex-col items-center gap-4 relative z-10 max-w-md">
+              <div class="w-12 h-12 rounded-full bg-emerald-500 text-neutral-950 flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-bounce">
+                <Icon name="MapPin" size={24} />
+              </div>
+              <h4 class="font-display font-bold text-white text-lg tracking-tight">Levent, Şişli, İstanbul</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed">
+                Ağır harita bileşenleri sayfa hızınızı düşürmez. İnteraktif haritayı yüklemek ve konumu Google Haritalar üzerinde incelemek için aşağıdaki butona tıklayın.
+              </p>
+              <button
+                id="load-google-map"
+                class="mt-2 flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-sans font-bold text-xs px-5 py-3 rounded-full transition-all cursor-pointer shadow-md"
+              >
+                İnteraktif Haritayı Yükle
+              </button>
+            </div>
+          </div>
+
+          <!-- Lazy-loaded Map Iframe Container (Initially hidden) -->
+          <div id="real-map-container" class="absolute inset-0 hidden">
+            <!-- Iframe will be injected dynamically on click -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Form submission handling
+  const form = document.getElementById('static-contact-form') as HTMLFormElement;
+  const successBanner = document.getElementById('form-success-banner');
+
+  if (form && successBanner) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Simulate/trigger successful client submission
+      successBanner.classList.remove('hidden');
+      form.reset();
+      
+      // Scroll smoothly to success banner
+      successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  // Interactive map lazy loading trigger
+  const loadMapBtn = document.getElementById('load-google-map');
+  const placeholder = document.getElementById('static-map-placeholder');
+  const realMapContainer = document.getElementById('real-map-container');
+
+  if (loadMapBtn && placeholder && realMapContainer) {
+    loadMapBtn.addEventListener('click', () => {
+      // Create iframe element dynamically
+      const iframe = document.createElement('iframe');
+      iframe.src = "https://www.google.com/maps/embed?pb=!11m18!1m12!1m3!1d3007.4107129596043!2d29.0116812!3d41.0772714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab65d6c8e3cc7%3A0xe103ee921f0be24c!2sLevent%20Loft!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str";
+      iframe.width = "100%";
+      iframe.height = "100%";
+      iframe.style.border = "0";
+      iframe.allowFullscreen = true;
+      iframe.loading = "lazy";
+      iframe.referrerPolicy = "no-referrer-when-downgrade";
+      iframe.title = "Astra Digital Merkez Ofis Konumu";
+
+      // Inject and reveal map
+      realMapContainer.appendChild(iframe);
+      realMapContainer.classList.remove('hidden');
+      placeholder.classList.add('opacity-0', 'pointer-events-none');
+    });
+  }
+</script>

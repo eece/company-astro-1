@@ -1,0 +1,141 @@
+---
+import Icon from './Icon.astro';
+
+const currentYear = new Date().getFullYear();
+
+const solutions = [
+  { title: "Web Geliştirme", path: "/hizmetlerimiz/modern-web-gelistirme" },
+  { title: "Yapay Zeka", path: "/hizmetlerimiz/yapay-zeka-entegrasyonu" },
+  { title: "UX/UI Tasarım", path: "/hizmetlerimiz/dijital-marka-ve-ux-tasarim" },
+  { title: "Mobil Uygulama", path: "/hizmetlerimiz/mobil-uygulama-gelistirme" }
+];
+---
+
+<footer class="bg-neutral-950 text-neutral-400 pt-20 pb-10 border-t border-neutral-900" id="app-footer">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <!-- Column 1: Brand & Bio -->
+      <div class="flex flex-col gap-6" id="footer-col-brand">
+        <a href="/" class="flex items-center gap-2 group cursor-pointer">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-display font-bold text-lg shadow-md shadow-emerald-500/10 group-hover:scale-105 transition-transform">
+            A
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-lg tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+              ASTRA
+            </span>
+            <span class="text-[9px] font-mono tracking-widest text-neutral-500 font-medium -mt-1 uppercase">
+              Digital
+            </span>
+          </div>
+        </a>
+        <p class="text-sm leading-relaxed text-neutral-400">
+          Yüksek hızlı, SEO odaklı ve modern kurumsal teknolojilerle işletmenizin dijital dünyadaki sınırlarını genişletiyoruz. Geleceği bugünden tasarlıyoruz.
+        </p>
+        <div class="flex items-center gap-4 mt-2">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="w-9 h-9 rounded-full bg-neutral-900 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-800 cursor-pointer"
+            aria-label="LinkedIn"
+          >
+            <Icon name="Linkedin" size={16} />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="w-9 h-9 rounded-full bg-neutral-900 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-800 cursor-pointer"
+            aria-label="Twitter"
+          >
+            <Icon name="Twitter" size={16} />
+          </a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="w-9 h-9 rounded-full bg-neutral-900 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-800 cursor-pointer"
+            aria-label="GitHub"
+          >
+            <Icon name="Github" size={16} />
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="flex flex-col gap-4" id="footer-col-links">
+        <h3 class="font-display font-semibold text-white text-sm tracking-wider uppercase">Kurumsal</h3>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li>
+            <a href="/" class="hover:text-emerald-400 transition-colors">
+              Ana Sayfa
+            </a>
+          </li>
+          <li>
+            <a href="/hakkimizda" class="hover:text-emerald-400 transition-colors">
+              Hakkımızda
+            </a>
+          </li>
+          <li>
+            <a href="/hizmetlerimiz" class="hover:text-emerald-400 transition-colors">
+              Hizmetlerimiz
+            </a>
+          </li>
+          <li>
+            <a href="/iletisim" class="hover:text-emerald-400 transition-colors">
+              İletişim
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Services Shortlist -->
+      <div class="flex flex-col gap-4" id="footer-col-services">
+        <h3 class="font-display font-semibold text-white text-sm tracking-wider uppercase">Çözümlerimiz</h3>
+        <ul class="flex flex-col gap-3 text-sm">
+          {solutions.map((sol) => (
+            <li>
+              <a href={sol.path} class="hover:text-emerald-400 transition-colors inline-flex items-center gap-1 group">
+                {sol.title}
+                <Icon name="ArrowUpRight" size={12} class="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 4: Contact Minimal -->
+      <div class="flex flex-col gap-4" id="footer-col-contact">
+        <h3 class="font-display font-semibold text-white text-sm tracking-wider uppercase">Merkez Ofis</h3>
+        <div class="flex flex-col gap-3 text-sm text-neutral-400">
+          <p class="leading-relaxed">
+            Levent Loft Plaza, Blok B, No: 42<br />
+            Şişli / İstanbul
+          </p>
+          <p>
+            <strong>Tel:</strong> +90 (212) 345 67 89
+          </p>
+          <p>
+            <strong>E-posta:</strong> info@astradigital.com
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-neutral-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500" id="footer-bottom">
+      <p>© {currentYear} Astra Digital. Tüm hakları saklıdır.</p>
+      <div class="flex items-center gap-6">
+        <a href="/iletisim" class="hover:text-neutral-300 transition-colors inline-flex items-center gap-1">
+          <Icon name="ShieldCheck" size={14} />
+          KVKK & Gizlilik Politikası
+        </a>
+        <a href="/iletisim" class="hover:text-neutral-300 transition-colors inline-flex items-center gap-1">
+          <Icon name="FileText" size={14} />
+          Kullanım Koşulları
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

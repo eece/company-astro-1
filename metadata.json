@@ -1,0 +1,6 @@
+{
+  "name": "Astra Digital",
+  "description": "Yüksek performanslı, modern ve yenilikçi kurumsal dijital çözümler sunan web ajansı.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,165 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { name: 'Ana Sayfa', path: '/' },
+  { name: 'Hakkımızda', path: '/hakkimizda' },
+  { name: 'Hizmetlerimiz', path: '/hizmetlerimiz' },
+  { name: 'İletişim', path: '/iletisim' },
+];
+
+const isActive = (path: string) => {
+  if (path === '/') {
+    return currentPath === '/' || currentPath === '';
+  }
+  return currentPath.startsWith(path);
+};
+---
+
+<header
+  id="app-header"
+  class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-6"
+>
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 group cursor-pointer" id="navbar-logo">
+      <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-display font-bold text-xl shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
+        A
+      </div>
+      <div class="flex flex-col">
+        <span class="font-display font-bold text-xl tracking-tight text-neutral-900 group-hover:text-emerald-600 transition-colors duration-300">
+          ASTRA
+        </span>
+        <span class="text-[10px] font-mono tracking-widest text-neutral-400 font-medium -mt-1 uppercase">
+          Digital
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-8" id="desktop-nav">
+      {navLinks.map((link) => (
+        <a
+          href={link.path}
+          class={`font-sans text-sm font-medium transition-colors relative py-1 ${
+            isActive(link.path)
+              ? 'text-emerald-600 font-semibold'
+              : 'text-neutral-600 hover:text-neutral-900'
+          }`}
+        >
+          {link.name}
+          {isActive(link.path) && (
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-500 rounded-full" />
+          )}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop CTA Button -->
+    <div class="hidden md:flex items-center" id="desktop-cta">
+      <a
+        href="/iletisim"
+        class="flex items-center gap-2 bg-neutral-900 text-white hover:bg-emerald-600 px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all duration-300 group shadow-md hover:shadow-lg hover:shadow-emerald-500/10 active:scale-95"
+      >
+        Teklif Alın
+        <svg class="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden p-2 rounded-lg text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-colors focus:outline-none cursor-pointer"
+      aria-label="Menüyü Aç/Kapat"
+    >
+      <!-- Menu Icon -->
+      <svg id="hamburger-icon" class="block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <!-- Close Icon -->
+      <svg id="close-icon" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Panel -->
+  <div
+    id="mobile-nav-panel"
+    class="fixed inset-x-0 top-[72px] bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-xl transition-all duration-300 md:hidden z-40 opacity-0 -translate-y-4 pointer-events-none"
+  >
+    <div class="px-6 py-6 flex flex-col gap-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.path}
+          class={`font-sans text-base font-medium py-2 border-b border-neutral-50 ${
+            isActive(link.path)
+              ? 'text-emerald-600 border-emerald-50'
+              : 'text-neutral-600 hover:text-neutral-900'
+          }`}
+        >
+          {link.name}
+        </a>
+      ))}
+      <a
+        href="/iletisim"
+        class="flex items-center justify-center gap-2 bg-neutral-900 text-white hover:bg-emerald-600 px-5 py-3 rounded-xl font-sans text-base font-medium transition-all duration-300 mt-2"
+      >
+        Teklif Alın
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Dynamic header styling on scroll
+  const header = document.getElementById('app-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('bg-white/85', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-neutral-100', 'py-4');
+      header?.classList.remove('bg-transparent', 'py-6');
+    } else {
+      header?.classList.add('bg-transparent', 'py-6');
+      header?.classList.remove('bg-white/85', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-neutral-100', 'py-4');
+    }
+  });
+
+  // Mobile menu open/close toggle
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const panel = document.getElementById('mobile-nav-panel');
+  const hamIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  if (toggleBtn && panel && hamIcon && closeIcon) {
+    let isOpen = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        panel.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+        panel.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        hamIcon.classList.add('hidden');
+        hamIcon.classList.remove('block');
+        closeIcon.classList.add('block');
+        closeIcon.classList.remove('hidden');
+      } else {
+        panel.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        panel.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        hamIcon.classList.add('block');
+        hamIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        closeIcon.classList.remove('block');
+      }
+    });
+  }
+</script>

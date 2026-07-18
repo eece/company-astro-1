@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all services from Content Collection
+const services = await getCollection('hizmetler');
+---
+
+<Layout title="Hizmetlerimiz & Dijital Çözümler">
+  <!-- Page Header -->
+  <section class="py-20 bg-neutral-900 text-white relative overflow-hidden" id="services-header">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/20 to-neutral-950/40"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-10"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center gap-6">
+      <span class="font-mono text-emerald-400 text-xs font-bold uppercase tracking-widest">NELER YAPIYORUZ?</span>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+        İşinizi Geleceğe Taşıyacak <br />Yüksek Mühendislik Çözümleri
+      </h1>
+      <p class="text-neutral-400 text-lg sm:text-xl max-w-2xl leading-relaxed">
+        Web geliştirmeden yapay zekaya, tasarımdan sunucu altyapılarına kadar tüm süreçlerinizi baştan uca tasarlıyor ve hayata geçiriyoruz.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid / Catalog -->
+  <section class="py-24 bg-white" id="services-grid">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Grid layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        {services.map((service, idx) => (
+          <div 
+            class="bg-neutral-50 border border-neutral-100 rounded-3xl p-8 hover:bg-white hover:shadow-2xl hover:shadow-neutral-200/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col gap-6 group relative overflow-hidden"
+          >
+            <!-- Background element for micro animation -->
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-neutral-200 group-hover:bg-emerald-500 transition-colors"></div>
+
+            <!-- Icon Frame -->
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center transition-colors duration-300">
+              <Icon name={service.data.iconName} size={24} />
+            </div>
+
+            <!-- Header Content -->
+            <div class="flex flex-col gap-2">
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-neutral-400">{service.data.category}</span>
+              <h3 class="font-display font-bold text-2xl text-neutral-900 group-hover:text-emerald-600 transition-colors">
+                {service.data.title}
+              </h3>
+            </div>
+
+            <!-- Description -->
+            <p class="text-neutral-600 text-sm sm:text-base leading-relaxed">
+              {service.data.shortDescription}
+            </p>
+
+            <!-- Features Highlights -->
+            <ul class="flex flex-col gap-2 mt-2" aria-label={`${service.data.title} Önemli Özellikleri`}>
+              {service.data.features.slice(0, 3).map((feat) => (
+                <li class="flex items-start gap-2.5 text-sm text-neutral-700">
+                  <Icon name="Check" size={16} class="text-emerald-500 mt-0.5 shrink-0" />
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- Dynamic CTA Link -->
+            <div class="mt-auto pt-6 border-t border-neutral-100 flex items-center">
+              <a 
+                href={`/hizmetlerimiz/${service.id}`} 
+                class="text-sm font-semibold text-neutral-900 hover:text-emerald-600 inline-flex items-center gap-1.5 transition-colors group/link cursor-pointer"
+              >
+                Hizmet Detayını İnceleyin
+                <Icon name="ArrowRight" size={16} class="group-hover/link:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance Trust Banner -->
+  <section class="py-20 bg-neutral-50 border-t border-neutral-100" id="trust-banner">
+    <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center gap-6">
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2">
+        <Icon name="Cpu" size={32} />
+      </div>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">Kusursuz Hız, Temiz Mühendislik</h2>
+      <p class="text-neutral-600 leading-relaxed text-sm sm:text-base">
+        Astra Digital olarak geliştirdiğimiz tüm sistemler, son sürüm Astro motoru ve optimize edilmiş Tailwind v4 kütüphanesiyle derlenir. Tarayıcı uyumluluğu, responsive dinamizm ve WCAG erişilebilirlik standartlarına %100 uyar. Hiçbir yavaşlatıcı üçüncü taraf script yüklemesi barındırmaz.
+      </p>
+    </div>
+  </section>
+</Layout>

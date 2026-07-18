@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import { getCollection, render } from 'astro:content';
+
+// Static Paths generation for all markdown services
+export async function getStaticPaths() {
+  const serviceEntries = await getCollection('hizmetler');
+  return serviceEntries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry, allEntries: serviceEntries },
+  }));
+}
+
+const { entry, allEntries } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={entry.data.title} description={entry.data.shortDescription}>
+  <!-- Header Banner -->
+  <section class="py-16 bg-neutral-900 text-white relative overflow-hidden" id="service-detail-header">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/20 to-neutral-950/40"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-start gap-4">
+      <a href="/hizmetlerimiz" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer">
+        <Icon name="ChevronLeft" size={16} />
+        Tüm Çözümlere Geri Dön
+      </a>
+      <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-500 mt-2">{entry.data.category}</span>
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mt-1">
+        {entry.data.title}
+      </h1>
+      <p class="text-neutral-400 text-base sm:text-lg max-w-3xl leading-relaxed mt-2">
+        {entry.data.subtitle}
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Body Grid Layout -->
+  <section class="py-20 bg-white" id="service-detail-body">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Sidebar Menu (Left Column) -->
+        <aside class="lg:col-span-4 flex flex-col gap-8" id="detail-sidebar">
+          <!-- Navigation Sidebar Card -->
+          <div class="bg-neutral-50 rounded-3xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
+            <h3 class="font-display font-bold text-lg text-neutral-900 border-b border-neutral-200 pb-3">Tüm Çözümlerimiz</h3>
+            <nav class="flex flex-col gap-2">
+              {allEntries.map((navItem) => (
+                <a
+                  href={`/hizmetlerimiz/${navItem.id}`}
+                  class={`flex items-center justify-between p-3 rounded-xl text-sm font-medium transition-all ${
+                    navItem.id === entry.id
+                      ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/15 font-semibold'
+                      : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100'
+                  }`}
+                >
+                  <span class="truncate pr-2">{navItem.data.title}</span>
+                  <Icon name="ArrowRight" size={16} class={navItem.id === entry.id ? 'text-white' : 'text-neutral-400'} />
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <!-- Feature Highlights Card -->
+          <div class="bg-neutral-950 text-white rounded-3xl p-6 shadow-xl flex flex-col gap-4">
+            <h3 class="font-display font-semibold text-sm tracking-widest uppercase text-emerald-400">NELER SUNUYORUZ?</h3>
+            <ul class="flex flex-col gap-4">
+              {entry.data.features.map((feat) => (
+                <li class="flex items-start gap-3 text-sm text-neutral-300">
+                  <Icon name="Check" size={16} class="text-emerald-400 mt-0.5 shrink-0" />
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Main Description & Core Content (Right Column) -->
+        <article class="lg:col-span-8 flex flex-col gap-12" id="detail-content">
+          <!-- Text Body Content (rendered from Markdown) -->
+          <div class="prose prose-neutral max-w-none text-neutral-700 leading-relaxed text-base sm:text-lg">
+            <div class="bg-neutral-50 rounded-3xl p-8 border border-neutral-100 mb-8 font-sans italic text-neutral-600 leading-relaxed">
+              "{entry.data.shortDescription}"
+            </div>
+            <!-- Astro Markdown Renderer -->
+            <Content />
+          </div>
+
+          <!-- Sequential Workflow (Süreç Bilgisi) -->
+          <div class="flex flex-col gap-8 pt-8 border-t border-neutral-100" id="workflow">
+            <h2 class="font-display text-2xl font-bold text-neutral-900 tracking-tight">Nasıl Çalışıyoruz? Sürecimiz</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {entry.data.steps.map((step, idx) => (
+                <div class="bg-neutral-50 rounded-2xl p-6 border border-neutral-100 flex gap-4 relative group hover:border-emerald-200 transition-colors">
+                  <!-- Number indicator -->
+                  <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 font-mono font-black text-lg flex items-center justify-center shrink-0">
+                    0{idx + 1}
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <h4 class="font-display font-bold text-neutral-900 text-base leading-snug group-hover:text-emerald-600 transition-colors">
+                      {step.title}
+                    </h4>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Direct Call to Action Inside Detail -->
+          <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-3xl p-8 border border-emerald-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8" id="cta-card">
+            <div class="flex flex-col gap-1.5">
+              <h3 class="font-display font-bold text-xl text-neutral-900">Bu Çözüme mi İhtiyacınız Var?</h3>
+              <p class="text-sm text-neutral-600 max-w-md">
+                Gereksinimlerinizi detaylandırmak ve markanıza özel projelendirme teklifi almak için hemen formu doldurun.
+              </p>
+            </div>
+            <a
+              href="/iletisim"
+              class="flex items-center gap-2 bg-neutral-900 hover:bg-emerald-600 text-white font-sans text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-300 shadow-md cursor-pointer shrink-0"
+            >
+              Teklif Alın / Danışın
+              <Icon name="ArrowRight" size={16} />
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
