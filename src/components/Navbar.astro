@@ -1,16 +1,21 @@
 ---
 const currentPath = Astro.url.pathname;
 
+const homeUrl = new URL('/', Astro.url).pathname;
+const hakkimizdaUrl = new URL('/hakkimizda', Astro.url).pathname;
+const hizmetlerimizUrl = new URL('/hizmetlerimiz', Astro.url).pathname;
+const iletisimUrl = new URL('/iletisim', Astro.url).pathname;
+
 const navLinks = [
-  { name: 'Ana Sayfa', path: '/' },
-  { name: 'Hakkımızda', path: '/hakkimizda' },
-  { name: 'Hizmetlerimiz', path: '/hizmetlerimiz' },
-  { name: 'İletişim', path: '/iletisim' },
+  { name: 'Ana Sayfa', path: homeUrl },
+  { name: 'Hakkımızda', path: hakkimizdaUrl },
+  { name: 'Hizmetlerimiz', path: hizmetlerimizUrl },
+  { name: 'İletişim', path: iletisimUrl },
 ];
 
 const isActive = (path: string) => {
-  if (path === '/') {
-    return currentPath === '/' || currentPath === '';
+  if (path === homeUrl) {
+    return currentPath === homeUrl || currentPath === '';
   }
   return currentPath.startsWith(path);
 };
@@ -22,7 +27,7 @@ const isActive = (path: string) => {
 >
   <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 group cursor-pointer" id="navbar-logo">
+    <a href={homeUrl} class="flex items-center gap-2 group cursor-pointer" id="navbar-logo">
       <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-display font-bold text-xl shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
         A
       </div>
@@ -58,7 +63,7 @@ const isActive = (path: string) => {
     <!-- Desktop CTA Button -->
     <div class="hidden md:flex items-center" id="desktop-cta">
       <a
-        href="/iletisim"
+        href={iletisimUrl}
         class="flex items-center gap-2 bg-neutral-900 text-white hover:bg-emerald-600 px-5 py-2.5 rounded-full font-sans text-sm font-medium transition-all duration-300 group shadow-md hover:shadow-lg hover:shadow-emerald-500/10 active:scale-95"
       >
         Teklif Alın
@@ -108,7 +113,7 @@ const isActive = (path: string) => {
         </a>
       ))}
       <a
-        href="/iletisim"
+        href={iletisimUrl}
         class="flex items-center justify-center gap-2 bg-neutral-900 text-white hover:bg-emerald-600 px-5 py-3 rounded-xl font-sans text-base font-medium transition-all duration-300 mt-2"
       >
         Teklif Alın

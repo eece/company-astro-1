@@ -8,6 +8,9 @@ import { statsData, testimonials, partnerBrands } from '../data';
 const allServices = await getCollection('hizmetler');
 // Take first 3 for featured display
 const featuredServices = allServices.slice(0, 3);
+
+const iletisimUrl = new URL('/iletisim', Astro.url).pathname;
+const hizmetlerimizUrl = new URL('/hizmetlerimiz', Astro.url).pathname;
 ---
 
 <Layout title="Yaratıcı Web & Dijital Mühendislik Ajansı">
@@ -39,14 +42,14 @@ const featuredServices = allServices.slice(0, 3);
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
           <a
-            href="/iletisim"
+            href={iletisimUrl}
             class="flex items-center justify-center gap-2 bg-neutral-900 hover:bg-emerald-600 text-white font-sans text-base font-semibold px-8 py-4 rounded-full transition-all duration-300 group shadow-lg hover:shadow-emerald-500/10 cursor-pointer"
           >
             Projenizi Başlatın
             <Icon name="ArrowRight" size={18} class="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="/hizmetlerimiz"
+            href={hizmetlerimizUrl}
             class="flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-800 font-sans text-base font-semibold px-8 py-4 rounded-full transition-all duration-300 cursor-pointer"
           >
             Hizmetlerimizi İnceleyin
@@ -161,7 +164,7 @@ const featuredServices = allServices.slice(0, 3);
           <h2 class="font-display text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">İşinizi Geleceğe Taşıyacak Hizmetler</h2>
         </div>
         <a
-          href="/hizmetlerimiz"
+          href={hizmetlerimizUrl}
           class="inline-flex items-center gap-2 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 text-neutral-800 font-sans text-sm font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-sm cursor-pointer"
         >
           Tüm Hizmetleri Gör
@@ -184,7 +187,7 @@ const featuredServices = allServices.slice(0, 3);
             </div>
 
             <div class="mt-auto pt-6 border-t border-neutral-50 flex items-center">
-              <a href={`/hizmetlerimiz/${service.id}`} class="text-sm font-semibold text-neutral-800 hover:text-emerald-600 inline-flex items-center gap-1.5 transition-colors group/link cursor-pointer">
+              <a href={new URL(`/hizmetlerimiz/${service.id}`, Astro.url).pathname} class="text-sm font-semibold text-neutral-800 hover:text-emerald-600 inline-flex items-center gap-1.5 transition-colors group/link cursor-pointer">
                 Detayları İncele
                 <Icon name="ArrowRight" size={16} class="group-hover/link:translate-x-1 transition-transform" />
               </a>
@@ -266,7 +269,7 @@ const featuredServices = allServices.slice(0, 3);
       </p>
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
         <a
-          href="/iletisim"
+          href={iletisimUrl}
           class="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-sans font-bold text-base px-8 py-4 rounded-full transition-all duration-300 group cursor-pointer"
         >
           Hemen İletişime Geçin

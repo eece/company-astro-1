@@ -3,11 +3,16 @@ import Icon from './Icon.astro';
 
 const currentYear = new Date().getFullYear();
 
+const homeUrl = new URL('/', Astro.url).pathname;
+const hakkimizdaUrl = new URL('/hakkimizda', Astro.url).pathname;
+const hizmetlerimizUrl = new URL('/hizmetlerimiz', Astro.url).pathname;
+const iletisimUrl = new URL('/iletisim', Astro.url).pathname;
+
 const solutions = [
-  { title: "Web Geliştirme", path: "/hizmetlerimiz/modern-web-gelistirme" },
-  { title: "Yapay Zeka", path: "/hizmetlerimiz/yapay-zeka-entegrasyonu" },
-  { title: "UX/UI Tasarım", path: "/hizmetlerimiz/dijital-marka-ve-ux-tasarim" },
-  { title: "Mobil Uygulama", path: "/hizmetlerimiz/mobil-uygulama-gelistirme" }
+  { title: "Web Geliştirme", path: new URL('/hizmetlerimiz/modern-web-gelistirme', Astro.url).pathname },
+  { title: "Yapay Zeka", path: new URL('/hizmetlerimiz/yapay-zeka-entegrasyonu', Astro.url).pathname },
+  { title: "UX/UI Tasarım", path: new URL('/hizmetlerimiz/dijital-marka-ve-ux-tasarim', Astro.url).pathname },
+  { title: "Mobil Uygulama", path: new URL('/hizmetlerimiz/mobil-uygulama-gelistirme', Astro.url).pathname }
 ];
 ---
 
@@ -16,7 +21,7 @@ const solutions = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
       <!-- Column 1: Brand & Bio -->
       <div class="flex flex-col gap-6" id="footer-col-brand">
-        <a href="/" class="flex items-center gap-2 group cursor-pointer">
+        <a href={homeUrl} class="flex items-center gap-2 group cursor-pointer">
           <div class="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-display font-bold text-lg shadow-md shadow-emerald-500/10 group-hover:scale-105 transition-transform">
             A
           </div>
@@ -68,22 +73,22 @@ const solutions = [
         <h3 class="font-display font-semibold text-white text-sm tracking-wider uppercase">Kurumsal</h3>
         <ul class="flex flex-col gap-3 text-sm">
           <li>
-            <a href="/" class="hover:text-emerald-400 transition-colors">
+            <a href={homeUrl} class="hover:text-emerald-400 transition-colors">
               Ana Sayfa
             </a>
           </li>
           <li>
-            <a href="/hakkimizda" class="hover:text-emerald-400 transition-colors">
+            <a href={hakkimizdaUrl} class="hover:text-emerald-400 transition-colors">
               Hakkımızda
             </a>
           </li>
           <li>
-            <a href="/hizmetlerimiz" class="hover:text-emerald-400 transition-colors">
+            <a href={hizmetlerimizUrl} class="hover:text-emerald-400 transition-colors">
               Hizmetlerimiz
             </a>
           </li>
           <li>
-            <a href="/iletisim" class="hover:text-emerald-400 transition-colors">
+            <a href={iletisimUrl} class="hover:text-emerald-400 transition-colors">
               İletişim
             </a>
           </li>
@@ -127,11 +132,11 @@ const solutions = [
     <div class="border-t border-neutral-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500" id="footer-bottom">
       <p>© {currentYear} Astra Digital. Tüm hakları saklıdır.</p>
       <div class="flex items-center gap-6">
-        <a href="/iletisim" class="hover:text-neutral-300 transition-colors inline-flex items-center gap-1">
+        <a href={iletisimUrl} class="hover:text-neutral-300 transition-colors inline-flex items-center gap-1">
           <Icon name="ShieldCheck" size={14} />
           KVKK & Gizlilik Politikası
         </a>
-        <a href="/iletisim" class="hover:text-neutral-300 transition-colors inline-flex items-center gap-1">
+        <a href={iletisimUrl} class="hover:text-neutral-300 transition-colors inline-flex items-center gap-1">
           <Icon name="FileText" size={14} />
           Kullanım Koşulları
         </a>
